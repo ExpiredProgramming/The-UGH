@@ -215,24 +215,74 @@
             border: 1px solid rgba(79, 195, 247, 0.3);
             border-radius: 15px;
             padding: 30px;
-            max-width: 90%;
+            max-width: 500px;
             width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
             text-align: center;
             backdrop-filter: blur(20px);
             position: relative;
         }
 
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
+        .game-page {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .game-page.active {
+            display: block;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(79, 195, 247, 0.2);
+            border: 1px solid #4fc3f7;
             color: white;
-            font-size: 24px;
+            padding: 12px 24px;
+            border-radius: 25px;
             cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: rgba(79, 195, 247, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+        }
+
+        .game-iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            border: 2px solid #4fc3f7;
+            border-radius: 10px;
+            background: #000;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .game-info {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-hub {
+            display: block;
+        }
+
+        .main-hub.hidden {
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -254,62 +304,81 @@
 <body>
     <div class="stars"></div>
     
-    <div class="container">
-        <header>
-            <h1 class="title">THE UGH</h1>
-            <p class="subtitle">the unblocked games hub</p>
-            <div class="nav-buttons">
-                <button class="nav-btn" onclick="scrollToGames()">Browse Games</button>
-                <button class="nav-btn" onclick="openModal('about')">About</button>
-                <button class="nav-btn" onclick="openModal('contact')">Contact</button>
+    <div class="main-hub" id="mainHub">
+        <div class="container">
+            <header>
+                <h1 class="title">THE UGH</h1>
+                <p class="subtitle">the unblocked games hub</p>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="scrollToGames()">Browse Games</button>
+                    <button class="nav-btn" onclick="openModal('about')">About</button>
+                    <button class="nav-btn" onclick="openModal('contact')">Contact</button>
+                </div>
+            </header>
+
+            <div class="games-section" id="games">
+                <h2 class="section-title">Featured Games</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="openGamePage('apocalypse-truck')">
+                        <div class="game-icon">🚛</div>
+                        <h3 class="game-title">Apocalypse Truck</h3>
+                        <p class="game-description">Drive through the apocalypse in this intense truck survival game!</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('tetris')">
+                        <div class="game-icon">🔲</div>
+                        <h3 class="game-title">Tetris</h3>
+                        <p class="game-description">Stack falling blocks to clear lines in this timeless puzzle game.</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('pong')">
+                        <div class="game-icon">🏓</div>
+                        <h3 class="game-title">Pong</h3>
+                        <p class="game-description">The classic arcade game that started it all. Bounce the ball!</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('asteroids')">
+                        <div class="game-icon">🚀</div>
+                        <h3 class="game-title">Asteroids</h3>
+                        <p class="game-description">Navigate through space and destroy asteroids in this retro shooter.</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('puzzle')">
+                        <div class="game-icon">🧩</div>
+                        <h3 class="game-title">Sliding Puzzle</h3>
+                        <p class="game-description">Arrange the numbered tiles in the correct order.</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('memory')">
+                        <div class="game-icon">🧠</div>
+                        <h3 class="game-title">Memory Game</h3>
+                        <p class="game-description">Test your memory by matching pairs of cards.</p>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+                </div>
             </div>
-        </header>
+        </div>
+    </div>
 
-        <div class="games-section" id="games">
-            <h2 class="section-title">Featured Games</h2>
-            <div class="games-grid">
-                <div class="game-card" onclick="startGame('apocalypse-truck')">
-                    <div class="game-icon">🚛</div>
-                    <h3 class="game-title">Apocalypse Truck</h3>
-                    <p class="game-description">Drive through the apocalypse in this intense truck survival game!</p>
-                    <button class="play-btn">Play Now</button>
-                </div>
-
-                <div class="game-card" onclick="startGame('tetris')">
-                    <div class="game-icon">🔲</div>
-                    <h3 class="game-title">Tetris</h3>
-                    <p class="game-description">Stack falling blocks to clear lines in this timeless puzzle game.</p>
-                    <button class="play-btn">Play Now</button>
-                </div>
-
-                <div class="game-card" onclick="startGame('pong')">
-                    <div class="game-icon">🏓</div>
-                    <h3 class="game-title">Pong</h3>
-                    <p class="game-description">The classic arcade game that started it all. Bounce the ball!</p>
-                    <button class="play-btn">Play Now</button>
-                </div>
-
-                <div class="game-card" onclick="startGame('asteroids')">
-                    <div class="game-icon">🚀</div>
-                    <h3 class="game-title">Asteroids</h3>
-                    <p class="game-description">Navigate through space and destroy asteroids in this retro shooter.</p>
-                    <button class="play-btn">Play Now</button>
-                </div>
-
-                <div class="game-card" onclick="startGame('puzzle')">
-                    <div class="game-icon">🧩</div>
-                    <h3 class="game-title">Sliding Puzzle</h3>
-                    <p class="game-description">Arrange the numbered tiles in the correct order.</p>
-                    <button class="play-btn">Play Now</button>
-                </div>
-
-                <div class="game-card" onclick="startGame('memory')">
-                    <div class="game-icon">🧠</div>
-                    <h3 class="game-title">Memory Game</h3>
-                    <p class="game-description">Test your memory by matching pairs of cards.</p>
-                    <button class="play-btn">Play Now</button>
-                </div>
+    <!-- Game Pages -->
+    <div class="game-page" id="apocalypseTruckPage">
+        <button class="back-btn" onclick="backToHub()">← Back to Hub</button>
+        <div class="container">
+            <div class="game-info">
+                <h1 style="color: #4fc3f7; margin-bottom: 10px;">Apocalypse Truck</h1>
+                <p style="color: #bbb; margin-bottom: 20px;">Drive through the apocalypse in this intense truck survival game!</p>
+                <p style="font-size: 0.9em; color: #aaa;">Use WASD or arrow keys to drive and survive the apocalypse!</p>
             </div>
+            <iframe src="https://cloud.onlinegames.io/games/2021/1/apocalypse-truck/index-og.html" 
+                    class="game-iframe"
+                    frameborder="0" 
+                    allowfullscreen>
+            </iframe>
         </div>
     </div>
 
@@ -321,27 +390,6 @@
     </div>
 
     <script>
-        // Create stars
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const numStars = 100;
-            
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                starsContainer.appendChild(star);
-            }
-        }
-
-        // Smooth scroll to games section
-        function scrollToGames() {
-            document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
-        }
-
         // Open modal
         function openModal(type) {
             const modal = document.getElementById('gameModal');
@@ -366,6 +414,66 @@
         // Close modal
         function closeModal() {
             document.getElementById('gameModal').style.display = 'none';
+        }
+
+        // Open game page
+        function openGamePage(gameType) {
+            const mainHub = document.getElementById('mainHub');
+            const gamePage = document.getElementById(gameType.replace('-', '') + 'Page');
+            
+            if (gamePage) {
+                mainHub.classList.add('hidden');
+                gamePage.classList.add('active');
+            }
+        }
+
+        // Back to hub
+        function backToHub() {
+            const mainHub = document.getElementById('mainHub');
+            const gamePages = document.querySelectorAll('.game-page');
+            
+            gamePages.forEach(page => page.classList.remove('active'));
+            mainHub.classList.remove('hidden');
+        }
+        // Create stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Smooth scroll to games section
+        function scrollToGames() {
+            document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Open game page
+        function openGamePage(gameType) {
+            const mainHub = document.getElementById('mainHub');
+            const gamePage = document.getElementById(gameType.replace('-', '') + 'Page');
+            
+            if (gamePage) {
+                mainHub.classList.add('hidden');
+                gamePage.classList.add('active');
+            }
+        }
+
+        // Back to hub
+        function backToHub() {
+            const mainHub = document.getElementById('mainHub');
+            const gamePages = document.querySelectorAll('.game-page');
+            
+            gamePages.forEach(page => page.classList.remove('active'));
+            mainHub.classList.remove('hidden');
         }
 
         // Start game
