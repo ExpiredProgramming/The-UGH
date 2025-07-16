@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click Sound Website</title>
+    <title>GeometryMaster - Learn Geometry Online</title>
     <style>
         * {
             margin: 0;
@@ -13,219 +13,458 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            color: #333;
         }
 
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        nav h1 {
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        h1 {
-            color: white;
+            color: #2c3e50;
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 0.5rem;
         }
 
-        p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2rem;
+        nav p {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content Areas */
+        .content-area {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
         }
 
-        .click-button {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        .content-area.active {
+            display: block;
+        }
+
+        /* Geometry Learning Page */
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .lesson-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.3rem;
-            border-radius: 50px;
+            padding: 1.5rem;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .lesson-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-card p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .lesson-card.secret {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border: 2px solid #ffd700;
             position: relative;
             overflow: hidden;
         }
 
-        .click-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+        .lesson-card.secret::before {
+            content: '🎮';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.3;
         }
 
-        .click-button:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        /* Gaming Hub */
+        .hub-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
         }
 
-        .click-button::before {
+        .hub-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .game-slot {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-slot:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        .game-slot::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
 
-        .click-button:active::before {
-            width: 300px;
-            height: 300px;
+        .game-slot:hover::before {
+            left: 100%;
         }
 
-        .click-counter {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            margin-top: 1.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: inline-block;
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .sound-status {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
+        .game-title {
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
-        @media (max-width: 600px) {
+        .game-description {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-available {
+            background: #27ae60;
+            color: white;
+        }
+
+        .status-coming-soon {
+            background: #f39c12;
+            color: white;
+        }
+
+        .status-locked {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .container {
-                margin: 20px;
-                padding: 2rem;
+                padding: 10px;
             }
             
-            h1 {
+            nav h1 {
                 font-size: 2rem;
             }
             
-            .click-button {
-                padding: 0.8rem 1.5rem;
-                font-size: 1.1rem;
+            .lesson-grid, .games-grid {
+                grid-template-columns: 1fr;
             }
+        }
+
+        /* Fake loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="sound-status" id="soundStatus">🔊 Sound Ready</div>
-    
+    <nav>
+        <div class="container">
+            <h1>📐 GeometryMaster</h1>
+            <p>Master the fundamentals of geometry with interactive lessons</p>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>Welcome to My Website!</h1>
-        <p>Click the button below to hear a satisfying click sound</p>
-        
-        <button class="click-button" id="clickButton">
-            🎵 Click Me! 🎵
-        </button>
-        
-        <div class="click-counter" id="clickCounter">
-            Clicks: 0
+        <!-- Fake Geometry Learning Page -->
+        <div id="geometryPage" class="content-area active">
+            <h2>📚 Geometry Lessons</h2>
+            <p>Welcome to GeometryMaster! Select a lesson below to start learning about shapes, angles, and spatial relationships.</p>
+            
+            <div class="lesson-grid">
+                <div class="lesson-card" onclick="showFakeLesson(1)">
+                    <h3>Lesson 1: Basic Shapes</h3>
+                    <p>Learn about circles, triangles, squares, and rectangles</p>
+                </div>
+                
+                <div class="lesson-card" onclick="showFakeLesson(2)">
+                    <h3>Lesson 2: Angles</h3>
+                    <p>Understanding acute, obtuse, and right angles</p>
+                </div>
+                
+                <div class="lesson-card" onclick="showFakeLesson(3)">
+                    <h3>Lesson 3: Perimeter</h3>
+                    <p>Calculate the perimeter of various shapes</p>
+                </div>
+                
+                <div class="lesson-card" onclick="showFakeLesson(4)">
+                    <h3>Lesson 4: Area</h3>
+                    <p>Find the area of triangles, rectangles, and circles</p>
+                </div>
+                
+                <div class="lesson-card" onclick="showFakeLesson(5)">
+                    <h3>Lesson 5: Volume</h3>
+                    <p>3D shapes and volume calculations</p>
+                </div>
+                
+                <div class="lesson-card" onclick="showFakeLesson(6)">
+                    <h3>Lesson 6: Pythagorean Theorem</h3>
+                    <p>a² + b² = c² and right triangle relationships</p>
+                </div>
+                
+                <div class="lesson-card secret" onclick="showGameHub()">
+                    <h3>Lesson 7: Advanced Concepts</h3>
+                    <p>Complex geometric relationships and proofs</p>
+                </div>
+                
+                <div class="lesson-card" onclick="showFakeLesson(8)">
+                    <h3>Lesson 8: Coordinate Geometry</h3>
+                    <p>Points, lines, and shapes on the coordinate plane</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gaming Hub (Hidden) -->
+        <div id="gameHub" class="content-area">
+            <button class="back-btn" onclick="showGeometryPage()">← Back to Lessons</button>
+            
+            <div class="hub-header">
+                <h2>The UGH</h2>
+                <p>hello the UGH is finally back!</p>
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-slot" onclick="playGame('snake')">
+                    <div class="game-icon">🐍</div>
+                    <div class="game-title">Snake Classic</div>
+                    <div class="game-description">Eat apples and grow longer without hitting walls</div>
+                    <span class="game-status status-available">Available</span>
+                </div>
+                
+                <div class="game-slot" onclick="playGame('tetris')">
+                    <div class="game-icon">🧩</div>
+                    <div class="game-title">Tetris</div>
+                    <div class="game-description">Stack falling blocks to clear lines</div>
+                    <span class="game-status status-available">Available</span>
+                </div>
+                
+                <div class="game-slot" onclick="playGame('pong')">
+                    <div class="game-icon">🏓</div>
+                    <div class="game-title">Pong</div>
+                    <div class="game-description">Classic paddle ball game</div>
+                    <span class="game-status status-available">Available</span>
+                </div>
+                
+                <div class="game-slot" onclick="playGame('breakout')">
+                    <div class="game-icon">🧱</div>
+                    <div class="game-title">Breakout</div>
+                    <div class="game-description">Break all the blocks with a bouncing ball</div>
+                    <span class="game-status status-coming-soon">Coming Soon</span>
+                </div>
+                
+                <div class="game-slot" onclick="playGame('space')">
+                    <div class="game-icon">🚀</div>
+                    <div class="game-title">Space Invaders</div>
+                    <div class="game-description">Defend Earth from alien invasion</div>
+                    <span class="game-status status-coming-soon">Coming Soon</span>
+                </div>
+                
+                <div class="game-slot" onclick="playGame('mario')">
+                    <div class="game-icon">🍄</div>
+                    <div class="game-title">Platform Adventure</div>
+                    <div class="game-description">Jump and run through exciting levels</div>
+                    <span class="game-status status-locked">Locked</span>
+                </div>
+                
+                <div class="game-slot" onclick="playGame('puzzle')">
+                    <div class="game-icon">🧩</div>
+                    <div class="game-title">Puzzle Master</div>
+                    <div class="game-description">Solve challenging brain teasers</div>
+                    <span class="game-status status-available">Available</span>
+                </div>
+                
+                <div class="game-slot" onclick="playGame('racing')">
+                    <div class="game-icon">🏎️</div>
+                    <div class="game-title">Speed Racer</div>
+                    <div class="game-description">High-speed racing action</div>
+                    <span class="game-status status-locked">Locked</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Click counter
-        let clickCount = 0;
-        const clickButton = document.getElementById('clickButton');
-        const clickCounter = document.getElementById('clickCounter');
-        const soundStatus = document.getElementById('soundStatus');
+        // Page navigation
+        function showGeometryPage() {
+            document.getElementById('geometryPage').classList.add('active');
+            document.getElementById('gameHub').classList.remove('active');
+        }
 
-        // Create AudioContext for better browser compatibility
-        let audioContext;
-        let clickSound;
+        function showGameHub() {
+            document.getElementById('geometryPage').classList.remove('active');
+            document.getElementById('gameHub').classList.add('active');
+        }
 
-        // Function to create click sound using Web Audio API
-        function createClickSound() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        // Fake lesson function
+        function showFakeLesson(lessonNumber) {
+            if (lessonNumber === 7) {
+                showGameHub();
+                return;
             }
-
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
             
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            const lessons = [
+                "Basic Shapes",
+                "Angles", 
+                "Perimeter",
+                "Area",
+                "Volume",
+                "Pythagorean Theorem",
+                "Advanced Concepts",
+                "Coordinate Geometry"
+            ];
             
-            // Create a click sound with quick attack and decay
-            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
-            
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-            
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.1);
+            alert(`Loading ${lessons[lessonNumber - 1]}...\n\nThis is a demo. In a real site, this would open the lesson content.`);
         }
 
-        // Alternative: Load external sound file (commented out - uncomment if you have a sound file)
-        /*
-        function loadSound() {
-            clickSound = new Audio('click-sound.mp3'); // You'd need to add this file
-            clickSound.preload = 'auto';
-        }
-        
-        function playLoadedSound() {
-            if (clickSound) {
-                clickSound.currentTime = 0;
-                clickSound.play().catch(e => console.log('Sound play failed:', e));
+        // Game launcher
+        function playGame(gameType) {
+            const games = {
+                snake: "🐍 Snake Classic",
+                tetris: "🧩 Tetris", 
+                pong: "🏓 Pong",
+                breakout: "🧱 Breakout",
+                space: "🚀 Space Invaders",
+                mario: "🍄 Platform Adventure",
+                puzzle: "🧩 Puzzle Master",
+                racing: "🏎️ Speed Racer"
+            };
+            
+            const comingSoon = ['breakout', 'space'];
+            const locked = ['mario', 'racing'];
+            
+            if (comingSoon.includes(gameType)) {
+                alert(`${games[gameType]} is coming soon!\n\nStay tuned for updates.`);
+            } else if (locked.includes(gameType)) {
+                alert(`${games[gameType]} is locked!\n\nComplete more challenges to unlock this game.`);
+            } else {
+                alert(`Loading ${games[gameType]}...\n\nThis is a demo. In a real site, this would launch the game.`);
             }
         }
-        */
 
-        // Initialize audio context on first user interaction
-        function initializeAudio() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                soundStatus.textContent = '🔊 Sound Ready';
-            }
-        }
-
-        // Handle button click
-        clickButton.addEventListener('click', function() {
-            // Initialize audio on first click if needed
-            initializeAudio();
-            
-            // Play sound
-            createClickSound();
-            
-            // Update counter
-            clickCount++;
-            clickCounter.textContent = `Clicks: ${clickCount}`;
-            
-            // Update sound status
-            soundStatus.textContent = '🎵 Playing Sound!';
-            setTimeout(() => {
-                soundStatus.textContent = '🔊 Sound Ready';
-            }, 500);
-        });
-
-        // Handle audio context state changes
+        // Add some fake loading animations
         document.addEventListener('DOMContentLoaded', function() {
-            soundStatus.textContent = '🔇 Click to Enable Sound';
+            // Simulate loading
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 300);
         });
 
-        // Resume audio context on user interaction (required by browsers)
-        document.addEventListener('click', function() {
-            if (audioContext && audioContext.state === 'suspended') {
-                audioContext.resume();
+        // Easter egg: Konami Code
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // Up Up Down Down Left Right Left Right B A
+        
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                alert('🎉 Konami Code activated!\n\nAll games unlocked!');
+                // Change all locked games to available
+                document.querySelectorAll('.status-locked').forEach(el => {
+                    el.textContent = 'Available';
+                    el.className = 'game-status status-available';
+                });
             }
         });
     </script>
