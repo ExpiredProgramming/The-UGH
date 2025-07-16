@@ -176,25 +176,22 @@
       const star = document.createElement('div');
       star.classList.add('star');
       star.style.left = `${Math.random() * 100}%`;
-      star.style.bottom = `-10px`; // start just below screen
+      star.style.bottom = `-10px`;
       star.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)];
 
-      // random animation duration between 15-25 seconds
       const duration = 15 + Math.random() * 10;
       star.style.animation = `floatStar ${duration}s linear forwards`;
 
       container.appendChild(star);
 
-      // remove star after animation finishes and spawn a new one
       star.addEventListener('animationend', () => {
         container.removeChild(star);
         createStar();
       });
     }
 
-    // spawn initial batch of stars staggered so they don't all start at once
-    for(let i = 0; i < 50; i++) {
-      setTimeout(createStar, i * 400);
+    for(let i = 0; i < 100; i++) {
+      setTimeout(createStar, i * 200);
     }
   </script>
 </body>
