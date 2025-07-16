@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tunnel Rush</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tunnel Rush - The UGH</title>
   <style>
     body {
       margin: 0;
@@ -15,44 +15,59 @@
       height: 100vh;
       overflow: hidden;
     }
+
     header {
-      padding: 50px 20px 20px 20px;
-      font-size: 18px;
+      padding: 20px;
       text-align: center;
-      background: transparent;
+      background-color: #0c0c0c; /* matched body bg to kill blue bar */
+      border-bottom: 2px solid #00ffff;
     }
-    button {
-      font-family: 'Press Start 2P', cursive;
-      background-color: #00ffff;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 20px;
-      cursor: pointer;
-      color: black;
-      font-size: 10px;
-      transition: background-color 0.2s;
-      margin-bottom: 30px;
+
+    h1 {
+      margin: 0;
+      font-size: 16px;
     }
-    button:hover {
-      background-color: #66ffff;
-    }
+
     iframe {
-      flex: 1;
+      flex-grow: 1;
       border: none;
       width: 100%;
       height: 100%;
     }
+
+    .back-btn {
+      background-color: #00ffff;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      color: #000;
+      transition: background-color 0.2s;
+    }
+
+    .back-btn:hover {
+      background-color: #0ff;
+    }
+
+    .btn-container {
+      text-align: center;
+      padding-bottom: 10px;
+    }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header>
-    <button onclick="window.location.href='index.html'">Back to UGH</button>
+    <h1>Tunnel Rush</h1>
   </header>
-  <iframe
-    id="iframe-game"
-    src="https://ubg100.github.io/games/tunnelrush/index.html"
-    scrolling="no"
-    sandbox="allow-scripts allow-same-origin"
-  ></iframe>
+  
+  <iframe src="https://ubg100.github.io/games/tunnelrush/index.html" allowfullscreen></iframe>
+  
+  <div class="btn-container">
+    <button class="back-btn" onclick="window.location.href='index.html'">Back to UGH</button>
+  </div>
 </body>
 </html>
