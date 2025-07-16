@@ -21,18 +21,18 @@
       height: 100%;
       pointer-events: none;
       z-index: -1;
+      overflow: visible;
     }
 
     .star {
       position: absolute;
-      width: 4px;   /* bigger stars */
+      width: 4px;
       height: 4px;
       border-radius: 50%;
-      background-color: #00ffff; /* default, overridden inline */
+      background-color: #00ffff;
       opacity: 0.7;
-      animation-name: floatStar;
       animation-timing-function: linear;
-      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
     }
 
     @keyframes floatStar {
@@ -172,15 +172,29 @@
     const container = document.getElementById('stars-container');
     const starColors = ['#00ffff', '#6666ff', '#99ccff', '#cceeff'];
 
-    for (let i = 0; i < 150; i++) {
+    function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
       star.style.left = `${Math.random() * 100}%`;
-      star.style.bottom = `${Math.random() * 100}%`;
+      star.style.bottom = `-10px`; // start just below screen
       star.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)];
-      star.style.animationDuration = `${15 + Math.random() * 10}s`;
-      star.style.animationIterationCount = 'infinite';
+
+      // random animation duration between 15-25 seconds
+      const duration = 15 + Math.random() * 10;
+      star.style.animation = `floatStar ${duration}s linear forwards`;
+
       container.appendChild(star);
+
+      // remove star after animation finishes and spawn a new one
+      star.addEventListener('animationend', () => {
+        container.removeChild(star);
+        createStar();
+      });
+    }
+
+    // spawn initial batch of stars staggered so they don't all start at once
+    for(let i = 0; i < 50; i++) {
+      setTimeout(createStar, i * 400);
     }
   </script>
 </body>
