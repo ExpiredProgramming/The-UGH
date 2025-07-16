@@ -1,762 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The UGH - Unblocked Games Hub</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The UGH</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0c0c0c;
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      overflow: hidden;
+    }
 
-        body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            color: white;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300%;
+      height: 300%;
+      background: transparent;
+      pointer-events: none;
+      z-index: -1;
+      animation: starFloat 60s linear infinite;
+    }
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
+    .stars::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(#00ffff 2px, transparent 2px),
+        radial-gradient(#6666ff 2px, transparent 2px);
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      background-position: 0 0, 150px 150px;
+      opacity: 0.6;
+    }
 
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #4fc3f7;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
+    @keyframes starFloat {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-200px, 200px); }
+    }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
+    header {
+      text-align: center;
+      padding: 50px 20px 20px 20px;
+      font-size: 18px;
+    }
 
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .subtitle {
+      font-size: 10px;
+      margin-top: 10px;
+      color: #ccc;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 50px 0;
-        }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
 
-        .title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(79, 195, 247, 0.5);
-            margin-bottom: 10px;
-        }
+    .btn {
+      background-color: #ccc;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      font-family: inherit;
+      font-size: 10px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: 0.2s;
+    }
 
-        .subtitle {
-            font-size: 1rem;
-            color: #aaa;
-            margin-bottom: 30px;
-        }
+    .btn:hover {
+      background-color: #00ffff;
+      color: #000;
+    }
 
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+    .game-hub {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 40px;
+    }
 
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
+    .game-slot {
+      background-color: #1f1f1f;
+      border: 2px solid #333;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      transition: 0.3s ease;
+      cursor: pointer;
+      border-radius: 12px;
+    }
 
-        .nav-btn:hover {
-            background: rgba(79, 195, 247, 0.2);
-            border-color: #4fc3f7;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
-        }
+    .game-slot:hover {
+      border-color: #00ffff;
+      transform: scale(1.05);
+    }
 
-        .games-section {
-            margin-top: 50px;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #4fc3f7;
-            text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .game-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #4fc3f7;
-            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.2);
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(79, 195, 247, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-
-        .game-card:hover::before {
-            animation: shimmer 0.8s ease-in-out;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
-        }
-
-        .game-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #4fc3f7;
-        }
-
-        .game-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .game-description {
-            color: #bbb;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .play-btn {
-            background: linear-gradient(45deg, #4fc3f7, #29b6f6);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .play-btn:hover {
-            background: linear-gradient(45deg, #29b6f6, #4fc3f7);
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
-        }
-
-        .game-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: rgba(26, 26, 46, 0.95);
-            border: 1px solid rgba(79, 195, 247, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            position: relative;
-        }
-
-        .game-page {
-            display: none;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .game-page.active {
-            display: block;
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(79, 195, 247, 0.2);
-            border: 1px solid #4fc3f7;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            background: rgba(79, 195, 247, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
-        }
-
-        .game-iframe {
-            width: 100%;
-            max-width: 800px;
-            height: 600px;
-            border: 2px solid #4fc3f7;
-            border-radius: 10px;
-            background: #000;
-            margin: 20px auto;
-            display: block;
-        }
-
-        .game-info {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .main-hub {
-            display: block;
-        }
-
-        .main-hub.hidden {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2rem;
-            }
-            
-            .nav-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    .game-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="stars"></div>
-    
-    <div class="main-hub" id="mainHub">
-        <div class="container">
-            <header>
-                <h1 class="title">THE UGH</h1>
-                <p class="subtitle">the unblocked games hub</p>
-                <div class="nav-buttons">
-                    <button class="nav-btn" onclick="scrollToGames()">Browse Games</button>
-                    <button class="nav-btn" onclick="openModal('about')">About</button>
-                    <button class="nav-btn" onclick="openModal('contact')">Contact</button>
-                </div>
-            </header>
-
-            <div class="games-section" id="games">
-                <h2 class="section-title">Featured Games</h2>
-                <div class="games-grid">
-                    <div class="game-card" onclick="openGamePage('apocalypse-truck')">
-                        <div class="game-icon">🚛</div>
-                        <h3 class="game-title">Apocalypse Truck</h3>
-                        <p class="game-description">Drive through the apocalypse in this intense truck survival game!</p>
-                        <button class="play-btn">Play Now</button>
-                    </div>
-
-                    <div class="game-card" onclick="startGame('tetris')">
-                        <div class="game-icon">🔲</div>
-                        <h3 class="game-title">Tetris</h3>
-                        <p class="game-description">Stack falling blocks to clear lines in this timeless puzzle game.</p>
-                        <button class="play-btn">Play Now</button>
-                    </div>
-
-                    <div class="game-card" onclick="startGame('pong')">
-                        <div class="game-icon">🏓</div>
-                        <h3 class="game-title">Pong</h3>
-                        <p class="game-description">The classic arcade game that started it all. Bounce the ball!</p>
-                        <button class="play-btn">Play Now</button>
-                    </div>
-
-                    <div class="game-card" onclick="startGame('asteroids')">
-                        <div class="game-icon">🚀</div>
-                        <h3 class="game-title">Asteroids</h3>
-                        <p class="game-description">Navigate through space and destroy asteroids in this retro shooter.</p>
-                        <button class="play-btn">Play Now</button>
-                    </div>
-
-                    <div class="game-card" onclick="startGame('puzzle')">
-                        <div class="game-icon">🧩</div>
-                        <h3 class="game-title">Sliding Puzzle</h3>
-                        <p class="game-description">Arrange the numbered tiles in the correct order.</p>
-                        <button class="play-btn">Play Now</button>
-                    </div>
-
-                    <div class="game-card" onclick="startGame('memory')">
-                        <div class="game-icon">🧠</div>
-                        <h3 class="game-title">Memory Game</h3>
-                        <p class="game-description">Test your memory by matching pairs of cards.</p>
-                        <button class="play-btn">Play Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="stars"></div>
+  <header>
+    <h1>The UGH</h1>
+    <div class="subtitle">its just so peak😭</div>
+    <div class="btn-container">
+      <button class="btn">Join our Discord!</button>
+      <button class="btn">Open in about:blank</button>
+      <button class="btn">Partners</button>
     </div>
+  </header>
 
-    <!-- Game Pages -->
-    <div class="game-page" id="apocalypseTruckPage">
-        <button class="back-btn" onclick="backToHub()">← Back to Hub</button>
-        <div class="container">
-            <div class="game-info">
-                <h1 style="color: #4fc3f7; margin-bottom: 10px;">Apocalypse Truck</h1>
-                <p style="color: #bbb; margin-bottom: 20px;">Drive through the apocalypse in this intense truck survival game!</p>
-                <p style="font-size: 0.9em; color: #aaa;">Use WASD or arrow keys to drive and survive the apocalypse!</p>
-            </div>
-            <iframe src="https://cloud.onlinegames.io/games/2021/1/apocalypse-truck/index-og.html" 
-                    class="game-iframe"
-                    frameborder="0" 
-                    allowfullscreen>
-            </iframe>
-        </div>
+  <section class="game-hub">
+    <div class="game-slot" onclick="window.location.href='stickman-parkour.html'">
+      <img class="game-img" src="/mnt/data/508109d7-af67-42ad-a022-29ad12b14d95.png" alt="Stickman Parkour">
+      Stickman Parkour
     </div>
-
-    <div class="game-modal" id="gameModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
-    <script>
-        // Open modal
-        function openModal(type) {
-            const modal = document.getElementById('gameModal');
-            const content = document.getElementById('modalContent');
-            
-            if (type === 'about') {
-                content.innerHTML = `
-                    <h2 style="color: #4fc3f7; margin-bottom: 20px;">About The UGH</h2>
-                    <p style="line-height: 1.6;">Welcome to The UGH - The Unblocked Games Hub! Your ultimate destination for unblocked gaming at school, work, or anywhere. We provide a cosmic collection of classic games that work everywhere, reimagined with modern flair in a beautiful space-themed environment.</p>
-                `;
-            } else if (type === 'contact') {
-                content.innerHTML = `
-                    <h2 style="color: #4fc3f7; margin-bottom: 20px;">Contact Us</h2>
-                    <p style="line-height: 1.6;">Have questions or suggestions? We'd love to hear from you!</p>
-                    <p style="margin-top: 20px;">Email: contact@theugh.games</p>
-                `;
-            }
-            
-            modal.style.display = 'flex';
-        }
-
-        // Close modal
-        function closeModal() {
-            document.getElementById('gameModal').style.display = 'none';
-        }
-
-        // Open game page
-        function openGamePage(gameType) {
-            const mainHub = document.getElementById('mainHub');
-            const gamePage = document.getElementById(gameType.replace('-', '') + 'Page');
-            
-            if (gamePage) {
-                mainHub.classList.add('hidden');
-                gamePage.classList.add('active');
-            }
-        }
-
-        // Back to hub
-        function backToHub() {
-            const mainHub = document.getElementById('mainHub');
-            const gamePages = document.querySelectorAll('.game-page');
-            
-            gamePages.forEach(page => page.classList.remove('active'));
-            mainHub.classList.remove('hidden');
-        }
-        // Create stars
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const numStars = 100;
-            
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                starsContainer.appendChild(star);
-            }
-        }
-
-        // Smooth scroll to games section
-        function scrollToGames() {
-            document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Open game page
-        function openGamePage(gameType) {
-            const mainHub = document.getElementById('mainHub');
-            const gamePage = document.getElementById(gameType.replace('-', '') + 'Page');
-            
-            if (gamePage) {
-                mainHub.classList.add('hidden');
-                gamePage.classList.add('active');
-            }
-        }
-
-        // Back to hub
-        function backToHub() {
-            const mainHub = document.getElementById('mainHub');
-            const gamePages = document.querySelectorAll('.game-page');
-            
-            gamePages.forEach(page => page.classList.remove('active'));
-            mainHub.classList.remove('hidden');
-        }
-
-        // Start game
-        function startGame(gameType) {
-            const modal = document.getElementById('gameModal');
-            const content = document.getElementById('modalContent');
-            
-            let gameContent = '';
-            
-            switch(gameType) {
-                case 'apocalypse-truck':
-                    gameContent = `
-                        <h2 style="color: #4fc3f7; margin-bottom: 20px;">Apocalypse Truck</h2>
-                        <iframe src="https://cloud.onlinegames.io/games/2021/1/apocalypse-truck/index-og.html" 
-                                width="800" height="600" 
-                                style="border: 2px solid #4fc3f7; border-radius: 10px; background: #000; max-width: 100%;" 
-                                frameborder="0" 
-                                allowfullscreen>
-                        </iframe>
-                        <div style="margin-top: 20px;">
-                            <p>Drive through the apocalypse and survive!</p>
-                            <p style="font-size: 0.9em; color: #aaa;">Use WASD or arrow keys to drive</p>
-                        </div>
-                    `;
-                    break;
-                case 'snake':
-                    gameContent = `
-                        <h2 style="color: #4fc3f7; margin-bottom: 20px;">Snake Game</h2>
-                        <canvas id="snakeCanvas" width="400" height="400" style="border: 2px solid #4fc3f7; background: #000;"></canvas>
-                        <div style="margin-top: 20px;">
-                            <p>Use arrow keys to move</p>
-                            <p>Score: <span id="score">0</span></p>
-                            <button onclick="resetSnake()" style="margin-top: 10px; padding: 10px 20px; background: #4fc3f7; border: none; color: white; border-radius: 5px; cursor: pointer;">Reset Game</button>
-                        </div>
-                    `;
-                    break;
-                case 'tetris':
-                    gameContent = `
-                        <h2 style="color: #4fc3f7; margin-bottom: 20px;">Tetris</h2>
-                        <p>Classic Tetris game coming soon!</p>
-                        <p style="margin-top: 20px;">This game is under development.</p>
-                    `;
-                    break;
-                case 'pong':
-                    gameContent = `
-                        <h2 style="color: #4fc3f7; margin-bottom: 20px;">Pong</h2>
-                        <canvas id="pongCanvas" width="400" height="300" style="border: 2px solid #4fc3f7; background: #000;"></canvas>
-                        <div style="margin-top: 20px;">
-                            <p>Use W/S keys to move left paddle</p>
-                            <p>Use Up/Down arrow keys to move right paddle</p>
-                            <button onclick="resetPong()" style="margin-top: 10px; padding: 10px 20px; background: #4fc3f7; border: none; color: white; border-radius: 5px; cursor: pointer;">Reset Game</button>
-                        </div>
-                    `;
-                    break;
-                default:
-                    gameContent = `
-                        <h2 style="color: #4fc3f7; margin-bottom: 20px;">Game Coming Soon</h2>
-                        <p>This game is currently under development.</p>
-                        <p style="margin-top: 20px;">Check back later for more games!</p>
-                    `;
-            }
-            
-            content.innerHTML = gameContent;
-            modal.style.display = 'flex';
-            
-            // Initialize specific games
-            if (gameType === 'snake') {
-                setTimeout(initSnake, 100);
-            } else if (gameType === 'pong') {
-                setTimeout(initPong, 100);
-            }
-        }
-
-        // Snake Game Implementation
-        let snake, direction, food, score, gameRunning;
-
-        function initSnake() {
-            const canvas = document.getElementById('snakeCanvas');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const gridSize = 20;
-            
-            snake = [{ x: 200, y: 200 }];
-            direction = { x: 0, y: 0 };
-            food = { x: 0, y: 0 };
-            score = 0;
-            gameRunning = true;
-            
-            generateFood();
-            gameLoop();
-            
-            function generateFood() {
-                food.x = Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize;
-                food.y = Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize;
-            }
-            
-            function gameLoop() {
-                if (!gameRunning) return;
-                
-                ctx.fillStyle = '#000';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Move snake
-                if (direction.x !== 0 || direction.y !== 0) {
-                    const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
-                    
-                    // Check wall collision
-                    if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
-                        gameRunning = false;
-                        alert('Game Over! Score: ' + score);
-                        return;
-                    }
-                    
-                    // Check self collision
-                    for (let segment of snake) {
-                        if (head.x === segment.x && head.y === segment.y) {
-                            gameRunning = false;
-                            alert('Game Over! Score: ' + score);
-                            return;
-                        }
-                    }
-                    
-                    snake.unshift(head);
-                    
-                    // Check food collision
-                    if (head.x === food.x && head.y === food.y) {
-                        score++;
-                        document.getElementById('score').textContent = score;
-                        generateFood();
-                    } else {
-                        snake.pop();
-                    }
-                }
-                
-                // Draw snake
-                ctx.fillStyle = '#4fc3f7';
-                for (let segment of snake) {
-                    ctx.fillRect(segment.x, segment.y, gridSize - 2, gridSize - 2);
-                }
-                
-                // Draw food
-                ctx.fillStyle = '#ff4444';
-                ctx.fillRect(food.x, food.y, gridSize - 2, gridSize - 2);
-                
-                setTimeout(gameLoop, 150);
-            }
-        }
-
-        function resetSnake() {
-            gameRunning = false;
-            setTimeout(initSnake, 100);
-        }
-
-        // Pong Game Implementation
-        let pongGame;
-
-        function initPong() {
-            const canvas = document.getElementById('pongCanvas');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            
-            pongGame = {
-                running: true,
-                ball: { x: 200, y: 150, dx: 3, dy: 2 },
-                leftPaddle: { x: 10, y: 120, width: 10, height: 60 },
-                rightPaddle: { x: 380, y: 120, width: 10, height: 60 },
-                keys: {}
-            };
-            
-            pongGameLoop();
-            
-            function pongGameLoop() {
-                if (!pongGame.running) return;
-                
-                // Clear canvas
-                ctx.fillStyle = '#000';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Move ball
-                pongGame.ball.x += pongGame.ball.dx;
-                pongGame.ball.y += pongGame.ball.dy;
-                
-                // Ball collision with top/bottom
-                if (pongGame.ball.y <= 0 || pongGame.ball.y >= canvas.height - 10) {
-                    pongGame.ball.dy = -pongGame.ball.dy;
-                }
-                
-                // Ball collision with paddles
-                if (pongGame.ball.x <= pongGame.leftPaddle.x + pongGame.leftPaddle.width &&
-                    pongGame.ball.y >= pongGame.leftPaddle.y &&
-                    pongGame.ball.y <= pongGame.leftPaddle.y + pongGame.leftPaddle.height) {
-                    pongGame.ball.dx = -pongGame.ball.dx;
-                }
-                
-                if (pongGame.ball.x >= pongGame.rightPaddle.x - 10 &&
-                    pongGame.ball.y >= pongGame.rightPaddle.y &&
-                    pongGame.ball.y <= pongGame.rightPaddle.y + pongGame.rightPaddle.height) {
-                    pongGame.ball.dx = -pongGame.ball.dx;
-                }
-                
-                // Reset ball if it goes off screen
-                if (pongGame.ball.x < 0 || pongGame.ball.x > canvas.width) {
-                    pongGame.ball.x = 200;
-                    pongGame.ball.y = 150;
-                    pongGame.ball.dx = -pongGame.ball.dx;
-                }
-                
-                // Move paddles
-                if (pongGame.keys['KeyW'] && pongGame.leftPaddle.y > 0) {
-                    pongGame.leftPaddle.y -= 5;
-                }
-                if (pongGame.keys['KeyS'] && pongGame.leftPaddle.y < canvas.height - pongGame.leftPaddle.height) {
-                    pongGame.leftPaddle.y += 5;
-                }
-                if (pongGame.keys['ArrowUp'] && pongGame.rightPaddle.y > 0) {
-                    pongGame.rightPaddle.y -= 5;
-                }
-                if (pongGame.keys['ArrowDown'] && pongGame.rightPaddle.y < canvas.height - pongGame.rightPaddle.height) {
-                    pongGame.rightPaddle.y += 5;
-                }
-                
-                // Draw everything
-                ctx.fillStyle = '#4fc3f7';
-                ctx.fillRect(pongGame.leftPaddle.x, pongGame.leftPaddle.y, pongGame.leftPaddle.width, pongGame.leftPaddle.height);
-                ctx.fillRect(pongGame.rightPaddle.x, pongGame.rightPaddle.y, pongGame.rightPaddle.width, pongGame.rightPaddle.height);
-                ctx.fillRect(pongGame.ball.x, pongGame.ball.y, 10, 10);
-                
-                // Draw center line
-                ctx.setLineDash([5, 5]);
-                ctx.strokeStyle = '#4fc3f7';
-                ctx.beginPath();
-                ctx.moveTo(canvas.width / 2, 0);
-                ctx.lineTo(canvas.width / 2, canvas.height);
-                ctx.stroke();
-                
-                requestAnimationFrame(pongGameLoop);
-            }
-        }
-
-        function resetPong() {
-            if (pongGame) {
-                pongGame.running = false;
-            }
-            setTimeout(initPong, 100);
-        }
-
-        // Keyboard event listeners
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'ArrowUp' || e.code === 'ArrowDown' || e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
-                e.preventDefault();
-                
-                // Snake game controls
-                if (direction !== undefined) {
-                    if (e.code === 'ArrowUp' && direction.y === 0) direction = { x: 0, y: -20 };
-                    if (e.code === 'ArrowDown' && direction.y === 0) direction = { x: 0, y: 20 };
-                    if (e.code === 'ArrowLeft' && direction.x === 0) direction = { x: -20, y: 0 };
-                    if (e.code === 'ArrowRight' && direction.x === 0) direction = { x: 20, y: 0 };
-                }
-            }
-            
-            // Pong game controls
-            if (pongGame && pongGame.keys !== undefined) {
-                pongGame.keys[e.code] = true;
-            }
-        });
-
-        document.addEventListener('keyup', (e) => {
-            if (pongGame && pongGame.keys !== undefined) {
-                pongGame.keys[e.code] = false;
-            }
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('gameModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('gameModal')) {
-                closeModal();
-            }
-        });
-
-        // Initialize stars on page load
-        createStars();
-    </script>
+    <div class="game-slot">Game 2</div>
+    <div class="game-slot">Game 3</div>
+    <div class="game-slot">Game 4</div>
+    <div class="game-slot">Game 5</div>
+    <div class="game-slot">Game 6</div>
+  </section>
 </body>
 </html>
