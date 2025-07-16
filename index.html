@@ -2,144 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cosmic Game Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The UGH</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #111 0%, #000 100%);
+      background-color: #0c0c0c;
       color: white;
-      overflow-x: hidden;
+      font-family: 'Press Start 2P', cursive;
+      overflow: hidden;
     }
 
-    header {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      z-index: 2;
-      position: relative;
-    }
-
-    .game-slot {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      aspect-ratio: 1 / 1;
-    }
-
-    .game-slot img {
+    .stars {
+      position: fixed;
+      bottom: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      border-radius: 5px;
-      object-fit: cover;
-    }
-
-    .game-slot a {
-      color: white;
-      display: block;
-      margin-top: 10px;
-      text-decoration: none;
-      font-weight: bold;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
     }
 
     .star {
-      position: fixed;
-      width: 3px;
-      height: 3px;
-      background: white;
+      position: absolute;
+      width: 2px;
+      height: 2px;
       border-radius: 50%;
-      opacity: 0.8;
-      pointer-events: none;
-      z-index: 0;
-      transition: opacity 0.3s ease-in-out;
+      background-color: #00ffff;
+      animation: floatStar 20s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatStar {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.2;
+      }
+      25% {
+        transform: translateY(-30vh) translateX(5vw);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translateY(-60vh) translateX(-3vw);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(0vw);
+        opacity: 0;
+      }
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 20px 20px;
+      font-size: 18px;
+    }
+
+    .subtitle {
+      font-size: 10px;
+      margin-top: 10px;
+      color: #ccc;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background-color: #ccc;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      font-family: inherit;
+      font-size: 10px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #00ffff;
+      color: #000;
+    }
+
+    .game-hub {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .game-slot {
+      background-color: #1f1f1f;
+      border: 2px solid #333;
+      width: 200px;
+      height: 220px;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      transition: 0.3s ease;
+      overflow: hidden;
+    }
+
+    .game-slot:hover {
+      border-color: #00ffff;
+      transform: scale(1.05);
+    }
+
+    .game-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 8px;
+    }
+
+    .game-slot > span {
+      font-size: 10px;
+      line-height: 1.2;
+      text-align: center;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="stars" id="stars-container"></div>
+
   <header>
-    <h1>Cosmic Game Hub</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="updates.html">Update Log</a>
-    </nav>
+    <h1>The UGH</h1>
+    <div class="subtitle">its just so peak😭</div>
+
+    <div class="btn-container">
+      <button class="btn" onclick="location.href='update-log.html'">Update Log</button>
+    </div>
   </header>
 
-  <div class="game-grid">
-    <div class="game-slot">
-      <img src="images/stickman-parkour.png" alt="Stickman Parkour" />
-      <a href="game.html">Play Stickman Parkour</a>
+  <section class="game-hub">
+    <div class="game-slot" onclick="window.location.href='stickman-parkour.html'">
+      <img class="game-img" src="/images/stickman.png" alt="Stickman Parkour" />
+      <span>Stickman Parkour</span>
     </div>
-  </div>
+    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 2</span></div>
+    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 3</span></div>
+    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 4</span></div>
+    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 5</span></div>
+    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 6</span></div>
+  </section>
 
   <script>
-    const starCount = 100;
-    const stars = [];
-
-    for (let i = 0; i < starCount; i++) {
+    const container = document.getElementById('stars-container');
+    for (let i = 0; i < 150; i++) {
       const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = `${Math.random() * 100}vw`;
-      star.style.top = `${Math.random() * 100}vh`;
-      star.dataset.xSpeed = (Math.random() * 0.5 - 0.25).toFixed(3); // random horizontal
-      star.dataset.ySpeed = (Math.random() * -1.5 - 0.2).toFixed(3); // upward speed
-      document.body.appendChild(star);
-      stars.push(star);
+      star.classList.add('star');
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.bottom = `${Math.random() * 100}%`;
+      star.style.animationDuration = `${15 + Math.random() * 10}s`;
+      container.appendChild(star);
     }
-
-    function animateStars() {
-      stars.forEach(star => {
-        let x = parseFloat(star.style.left);
-        let y = parseFloat(star.style.top);
-        const xSpeed = parseFloat(star.dataset.xSpeed);
-        const ySpeed = parseFloat(star.dataset.ySpeed);
-
-        x += xSpeed;
-        y += ySpeed;
-
-        if (y < -2 || x < -2 || x > 102) {
-          x = Math.random() * 100;
-          y = 102;
-        }
-
-        star.style.left = `${x}vw`;
-        star.style.top = `${y}vh`;
-      });
-
-      requestAnimationFrame(animateStars);
-    }
-
-    animateStars();
   </script>
 </body>
 </html>
