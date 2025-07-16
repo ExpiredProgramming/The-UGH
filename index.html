@@ -215,10 +215,13 @@
             border: 1px solid rgba(79, 195, 247, 0.3);
             border-radius: 15px;
             padding: 30px;
-            max-width: 500px;
+            max-width: 90%;
             width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
             text-align: center;
             backdrop-filter: blur(20px);
+            position: relative;
         }
 
         .close-btn {
@@ -254,7 +257,7 @@
     <div class="container">
         <header>
             <h1 class="title">THE UGH</h1>
-            <p class="subtitle">its just, so peak😭</p>
+            <p class="subtitle">the unblocked games hub</p>
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="scrollToGames()">Browse Games</button>
                 <button class="nav-btn" onclick="openModal('about')">About</button>
@@ -265,10 +268,10 @@
         <div class="games-section" id="games">
             <h2 class="section-title">Featured Games</h2>
             <div class="games-grid">
-                <div class="game-card" onclick="startGame('snake')">
-                    <div class="game-icon">🐍</div>
-                    <h3 class="game-title">Snake</h3>
-                    <p class="game-description">Classic snake game with a cosmic twist. Eat the food and grow longer!</p>
+                <div class="game-card" onclick="startGame('apocalypse-truck')">
+                    <div class="game-icon">🚛</div>
+                    <h3 class="game-title">Apocalypse Truck</h3>
+                    <p class="game-description">Drive through the apocalypse in this intense truck survival game!</p>
                     <button class="play-btn">Play Now</button>
                 </div>
 
@@ -373,6 +376,21 @@
             let gameContent = '';
             
             switch(gameType) {
+                case 'apocalypse-truck':
+                    gameContent = `
+                        <h2 style="color: #4fc3f7; margin-bottom: 20px;">Apocalypse Truck</h2>
+                        <iframe src="https://cloud.onlinegames.io/games/2021/1/apocalypse-truck/index-og.html" 
+                                width="800" height="600" 
+                                style="border: 2px solid #4fc3f7; border-radius: 10px; background: #000; max-width: 100%;" 
+                                frameborder="0" 
+                                allowfullscreen>
+                        </iframe>
+                        <div style="margin-top: 20px;">
+                            <p>Drive through the apocalypse and survive!</p>
+                            <p style="font-size: 0.9em; color: #aaa;">Use WASD or arrow keys to drive</p>
+                        </div>
+                    `;
+                    break;
                 case 'snake':
                     gameContent = `
                         <h2 style="color: #4fc3f7; margin-bottom: 20px;">Snake Game</h2>
