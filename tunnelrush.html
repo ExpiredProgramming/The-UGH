@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tunnel Rush</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0c0c0c;
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    header {
+      padding: 10px 20px;
+      font-size: 12px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    button {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #00ffff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      color: black;
+      font-size: 10px;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #66ffff;
+    }
+    iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button onclick="window.location.href='index.html'">Back to UGH</button>
+    <div>Tunnel Rush</div>
+  </header>
+  <iframe
+    id="iframe-game"
+    src="https://ubg100.github.io/games/tunnelrush/index.html"
+    scrolling="no"
+    sandbox="allow-scripts allow-same-origin"
+  ></iframe>
+</body>
+</html>
