@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Sound Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .click-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .click-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .click-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .click-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .click-button:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .click-counter {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .sound-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .click-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sound-status" id="soundStatus">🔊 Sound Ready</div>
+    
+    <div class="container">
+        <h1>Welcome to My Website!</h1>
+        <p>Click the button below to hear a satisfying click sound</p>
+        
+        <button class="click-button" id="clickButton">
+            🎵 Click Me! 🎵
+        </button>
+        
+        <div class="click-counter" id="clickCounter">
+            Clicks: 0
+        </div>
+    </div>
+
+    <script>
+        // Click counter
+        let clickCount = 0;
+        const clickButton = document.getElementById('clickButton');
+        const clickCounter = document.getElementById('clickCounter');
+        const soundStatus = document.getElementById('soundStatus');
+
+        // Create AudioContext for better browser compatibility
+        let audioContext;
+        let clickSound;
+
+        // Function to create click sound using Web Audio API
+        function createClickSound() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Create a click sound with quick attack and decay
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        // Alternative: Load external sound file (commented out - uncomment if you have a sound file)
+        /*
+        function loadSound() {
+            clickSound = new Audio('click-sound.mp3'); // You'd need to add this file
+            clickSound.preload = 'auto';
+        }
+        
+        function playLoadedSound() {
+            if (clickSound) {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(e => console.log('Sound play failed:', e));
+            }
+        }
+        */
+
+        // Initialize audio context on first user interaction
+        function initializeAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                soundStatus.textContent = '🔊 Sound Ready';
+            }
+        }
+
+        // Handle button click
+        clickButton.addEventListener('click', function() {
+            // Initialize audio on first click if needed
+            initializeAudio();
+            
+            // Play sound
+            createClickSound();
+            
+            // Update counter
+            clickCount++;
+            clickCounter.textContent = `Clicks: ${clickCount}`;
+            
+            // Update sound status
+            soundStatus.textContent = '🎵 Playing Sound!';
+            setTimeout(() => {
+                soundStatus.textContent = '🔊 Sound Ready';
+            }, 500);
+        });
+
+        // Handle audio context state changes
+        document.addEventListener('DOMContentLoaded', function() {
+            soundStatus.textContent = '🔇 Click to Enable Sound';
+        });
+
+        // Resume audio context on user interaction (required by browsers)
+        document.addEventListener('click', function() {
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        });
+    </script>
+</body>
+</html>
