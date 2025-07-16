@@ -128,16 +128,20 @@
     .game-slot {
       background-color: #1f1f1f;
       border: 2px solid #333;
+      width: 140px;
+      height: 140px;
       padding: 10px;
-      width: 130px;
+      box-sizing: border-box;
       text-align: center;
       color: white;
       cursor: pointer;
       border-radius: 12px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       transition: 0.3s ease;
+      overflow: hidden;
     }
 
     .game-slot:hover {
@@ -147,9 +151,17 @@
 
     .game-img {
       width: 110px;
-      height: auto;
+      height: 110px;
       border-radius: 8px;
       margin-bottom: 6px;
+      object-fit: cover;
+    }
+
+    .game-slot > span {
+      font-size: 10px;
+      line-height: 1.2;
+      word-break: break-word;
+      overflow: hidden;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
@@ -169,13 +181,23 @@
   <section class="game-hub">
     <div class="game-slot" onclick="window.location.href='stickman-parkour.html'">
       <img class="game-img" src="/images/stickman.png" alt="Stickman Parkour" />
-      Stickman Parkour
+      <span>Stickman Parkour</span>
     </div>
-    <div class="game-slot">Game 2</div>
-    <div class="game-slot">Game 3</div>
-    <div class="game-slot">Game 4</div>
-    <div class="game-slot">Game 5</div>
-    <div class="game-slot">Game 6</div>
+    <div class="game-slot">
+      <span>Game 2</span>
+    </div>
+    <div class="game-slot">
+      <span>Game 3</span>
+    </div>
+    <div class="game-slot">
+      <span>Game 4</span>
+    </div>
+    <div class="game-slot">
+      <span>Game 5</span>
+    </div>
+    <div class="game-slot">
+      <span>Game 6</span>
+    </div>
   </section>
 </body>
 </html>
