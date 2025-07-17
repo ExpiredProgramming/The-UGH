@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monkey Mart - The UGH</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0c0c0c;
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
 
+    header {
+      padding: 20px;
+      text-align: center;
+      background-color: #111;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    iframe {
+      flex-grow: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .back-btn {
+      background-color: #00ffff;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      color: #000;
+      transition: background-color 0.2s;
+    }
+
+    .back-btn:hover {
+      background-color: #0ff;
+    }
+
+    .btn-container {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>Monkey Mart</h1>
+  </header>
+
+  <iframe src="https://ubg365.github.io/monkey-mart/play.html" allowfullscreen></iframe>
+
+  <div class="btn-container">
+    <button class="back-btn" onclick="window.location.href='index.html'">Back to UGH</button>
+  </div>
+</body>
+</html>
