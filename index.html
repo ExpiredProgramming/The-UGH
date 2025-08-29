@@ -155,6 +155,13 @@
     function createStar(randomY = false) {
       const star = document.createElement('div');
       star.classList.add('star');
+
+      // size variation
+      const sizeMultiplier = 0.4 + Math.random() * (1.25 - 0.4);
+      const baseSize = 4;
+      star.style.width = `${baseSize * sizeMultiplier}px`;
+      star.style.height = `${baseSize * sizeMultiplier}px`;
+
       star.style.left = `${Math.random() * 100}%`;
 
       if (randomY) {
