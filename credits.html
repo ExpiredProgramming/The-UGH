@@ -24,10 +24,7 @@
     }
     .star {
       position: absolute;
-      width: 4px;
-      height: 4px;
       border-radius: 50%;
-      background-color: #00ffff;
       opacity: 0.7;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
@@ -52,6 +49,8 @@
       padding: 20px;
       text-align: left;
       min-height: 200px; /* blank area */
+      font-size: 14px;
+      line-height: 1.8;
     }
     .back {
       display: block;
@@ -72,10 +71,10 @@
 
   <div class="credits-container">
     <h2>Credits</h2>
-<p>
-developed by <strong>programplayz,</strong> all programming was done by me twin 😭✌️.
-</p>
-every pixel, molecule of code was done by me.. god i hate solo coding.
+    <p>
+      developed by <strong>programplayz,</strong> all programming was done by me twin 😭✌️.
+    </p>
+    every pixel, molecule of code was done by me.. god i hate solo coding.
   </div>
 
   <a class="back" href="index.html">← Back to Main</a>
@@ -83,23 +82,38 @@ every pixel, molecule of code was done by me.. god i hate solo coding.
   <script>
     const container = document.getElementById('stars-container');
     const starColors = ['#00ffff', '#6666ff', '#99ccff', '#cceeff'];
-    function createStar() {
+
+    function createStar(randomY = false) {
       const star = document.createElement('div');
       star.classList.add('star');
+
+      // size variation
+      const sizeMultiplier = 0.4 + Math.random() * (1.25 - 0.4);
+      const baseSize = 4;
+      star.style.width = `${baseSize * sizeMultiplier}px`;
+      star.style.height = `${baseSize * sizeMultiplier}px`;
+
       star.style.left = `${Math.random() * 100}%`;
-      star.style.bottom = `-10px`;
+
+      if (randomY) {
+        star.style.bottom = `${Math.random() * 100}vh`;
+      } else {
+        star.style.bottom = `-10px`;
+      }
+
       star.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)];
       const duration = 15 + Math.random() * 10;
       star.style.animation = `floatStar ${duration}s linear forwards`;
       container.appendChild(star);
+
       star.addEventListener('animationend', () => {
         container.removeChild(star);
         createStar();
       });
     }
-    for(let i = 0; i < 100; i++) {
-      setTimeout(createStar, i * 200);
-    }
+
+    for (let i = 0; i < 100; i++) createStar(true);
+    setInterval(() => createStar(), 200);
   </script>
 </body>
 </html>
