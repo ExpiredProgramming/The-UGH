@@ -74,10 +74,6 @@
     .log-container {
       max-width: 800px;
       margin: 0 auto 40px auto;
-      background-color: #1f1f1f;
-      border: 2px solid #333;
-      border-radius: 12px;
-      padding: 20px;
       font-size: 14px;
       line-height: 1.8;
       white-space: pre-line;
@@ -120,14 +116,9 @@
       star.style.height = `${baseSize * sizeMultiplier}px`;
 
       star.style.left = `${Math.random() * 100}%`;
-
-      if (randomY) {
-        star.style.bottom = `${Math.random() * 100}vh`;
-      } else {
-        star.style.bottom = `-10px`;
-      }
-
+      star.style.bottom = randomY ? `${Math.random() * 100}vh` : `-10px`;
       star.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)];
+
       const duration = 15 + Math.random() * 10;
       star.style.animation = `floatStar ${duration}s linear forwards`;
       container.appendChild(star);
