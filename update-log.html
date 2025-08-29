@@ -1,91 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Update Log - The UGH</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
     body {
+      background-color: #121212;
+      color: #f5f5f5;
+      font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      background-color: #0c0c0c;
-      color: white;
-      font-family: 'Press Start 2P', cursive;
-      padding: 40px 40px 60px;
+      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      box-sizing: border-box;
     }
+
     header {
-      width: 100%;
-      max-width: 900px;
       text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
       margin-bottom: 30px;
-      padding-bottom: 10px;
     }
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    button {
-      background-color: #ccc;
-      color: black;
-      border: none;
+
+    .nav-buttons a {
+      text-decoration: none;
+      background: #1f1f1f;
+      color: #f5f5f5;
+      padding: 12px 25px;
       border-radius: 12px;
-      padding: 12px 24px;
-      cursor: pointer;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 14px;
-      transition: background-color 0.3s;
-      margin-top: 20px;
-      box-shadow: 0 0 10px #00ffff66;
-      user-select: none;
+      transition: 0.3s;
+      font-size: 1rem;
     }
-    button:hover {
-      background-color: #00ffff;
-      color: #000;
-      box-shadow: 0 0 18px #00ffffcc;
+
+    .nav-buttons a:hover {
+      background: #3a3a3a;
     }
-    ul {
-      width: 100%;
-      max-width: 900px;
-      list-style: none;
-      padding: 20px 30px;
-      margin: 0 auto;
-      background: #111111cc;
-      border-radius: 20px;
-      box-shadow: 0 0 30px #00ffff33;
-      user-select: text;
+
+    .log-container {
+      width: 80%;
+      max-width: 800px;
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
     }
-    li {
-      border-left: 4px solid #00ffff;
-      padding-left: 16px;
-      margin-bottom: 25px;
-      font-size: 16px;
-      line-height: 1.6;
-      white-space: normal;
-      letter-spacing: 0.03em;
-      color: #d0f0f0;
+
+    .log-entry {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #2a2a2a;
+      border-radius: 8px;
+    }
+
+    .log-entry h2 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: #f5f5f5;
+    }
+
+    .log-entry p {
+      margin: 8px 0 0;
+      font-size: 1rem;
+      color: #cccccc;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Update Log - The UGH</h1>
-    <button onclick="window.location.href='index.html'">Back to UGH</button>
+    <h1>Update Log</h1>
+    <div class="nav-buttons">
+      <a href="index.html">Back to UGH</a>
+      <a href="credits.html">Credits</a>
+    </div>
   </header>
-  <ul>
-    <li><strong>V1 Released</strong> The UGH!</li>
-    <li><strong>V1.1</strong> Added star theme, reworked UI as a whole, and changed background colors to fit the stars.</li>
-    <li><strong>V1.2</strong> Fixed bugs and added the first game.</li>
-    <li><strong>V1.3</strong> Removed Join Discord, Partners, and about:blank buttons; cleaned up header buttons.</li>
-    <li><strong>V1.4</strong> Reworked star animation to move up like fire with jitter and varied colors.</li>
-    <li><strong>V1.5</strong> Tunnel Rush added.</li>
-  </ul>
+
+  <div class="log-container">
+    <div class="log-entry">
+      <h2>V1.4</h2>
+      <p>Monkey Mart added.</p>
+    </div>
+    <div class="log-entry">
+      <h2>V1.3</h2>
+      <p>Tunnel Rush added.</p>
+    </div>
+    <div class="log-entry">
+      <h2>V1.2</h2>
+      <p>Stickman Parkour added.</p>
+    </div>
+    <div class="log-entry">
+      <h2>V1.1</h2>
+      <p>First game added.</p>
+    </div>
+    <div class="log-entry">
+      <h2>V1.0</h2>
+      <p>Site foundation built.</p>
+    </div>
+  </div>
 </body>
 </html>
