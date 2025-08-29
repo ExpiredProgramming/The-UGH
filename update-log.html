@@ -48,11 +48,38 @@
       margin-top: 10px;
       color: #ccc;
     }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background-color: #ccc;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      font-family: inherit;
+      font-size: 10px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background-color: #00ffff;
+      color: #000;
+    }
     .content {
       text-align: center;
       margin-top: 50px;
-      font-size: 10px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .content ul {
+      display: inline-block;
+      text-align: left;
+      padding-left: 20px;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
@@ -63,11 +90,16 @@
   <header>
     <h1>Update Log</h1>
     <div class="subtitle">its just so peak😭</div>
+    <div class="btn-container">
+      <button class="btn" onclick="location.href='index.html'">Back to Home</button>
+    </div>
   </header>
 
   <div class="content">
-    Launch!<br>
-    V1.1: Added three new games, reworked a couple anims(?)
+    <ul>
+      <li>Launch!</li>
+      <li>V1.1: Added three new games, reworked a couple anims(?)</li>
+    </ul>
   </div>
 
   <script>
