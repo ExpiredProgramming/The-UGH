@@ -168,8 +168,9 @@
       });
     }
 
-    for (let i = 0; i < 100; i++) {
-      setTimeout(createStar, i * 200);
+    // create 200 stars immediately to cover screen from start
+    for (let i = 0; i < 200; i++) {
+      createStar();
     }
   </script>
 </body>
