@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Credits - The UGH</title>
+  <title>Update Log - The UGH</title>
   <style>
     body {
       margin: 0;
@@ -12,6 +12,7 @@
       font-family: 'Press Start 2P', cursive;
       overflow: hidden;
     }
+
     .stars {
       position: fixed;
       bottom: 0;
@@ -22,6 +23,7 @@
       z-index: -1;
       overflow: visible;
     }
+
     .star {
       position: absolute;
       border-radius: 50%;
@@ -29,55 +31,80 @@
       animation-timing-function: linear;
       animation-fill-mode: forwards;
     }
+
     @keyframes floatStar {
       0% { transform: translateY(0) translateX(0); opacity: 0.2; }
       25% { transform: translateY(-30vh) translateX(5vw); opacity: 0.5; }
       50% { transform: translateY(-60vh) translateX(-3vw); opacity: 0.8; }
       100% { transform: translateY(-100vh) translateX(0vw); opacity: 0; }
     }
+
     header {
       text-align: center;
       padding: 40px 20px 10px 20px;
       font-size: 18px;
     }
-    .credits-container {
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 10px 0 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background-color: #ccc;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      font-family: inherit;
+      font-size: 10px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #00ffff;
+      color: #000;
+    }
+
+    .log-container {
       max-width: 800px;
-      margin: 20px auto;
+      margin: 0 auto 40px auto;
       background-color: #1f1f1f;
       border: 2px solid #333;
       border-radius: 12px;
       padding: 20px;
-      text-align: left;
-      min-height: 200px; /* blank area */
       font-size: 14px;
       line-height: 1.8;
+      white-space: pre-line;
     }
-    .back {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      color: #00ffff;
-      text-decoration: none;
-      font-size: 10px;
+
+    .log-container ul {
+      padding-left: 20px;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="stars" id="stars-container"></div>
+
   <header>
-    <h1>Credits</h1>
+    <h1>Update Log</h1>
+    <div class="btn-container">
+      <button class="btn" onclick="location.href='index.html'">← Back to Main</button>
+    </div>
   </header>
 
-  <div class="credits-container">
-    <h2>Credits</h2>
-    <p>
-      developed by <strong>programplayz,</strong> all programming was done by me twin 😭✌️.
-    </p>
-    every pixel, molecule of code was done by me.. god i hate solo coding.
+  <div class="log-container">
+    <ul>
+      <li>Launch!</li>
+      <li>V1.1: Added three new games, reworked a couple anims(?)</li>
+    </ul>
   </div>
-
-  <a class="back" href="index.html">← Back to Main</a>
 
   <script>
     const container = document.getElementById('stars-container');
@@ -87,7 +114,6 @@
       const star = document.createElement('div');
       star.classList.add('star');
 
-      // size variation
       const sizeMultiplier = 0.4 + Math.random() * (1.25 - 0.4);
       const baseSize = 4;
       star.style.width = `${baseSize * sizeMultiplier}px`;
