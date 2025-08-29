@@ -1,204 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The UGH</title>
   <style>
     body {
       margin: 0;
-      background-color: #0c0c0c;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: black;
       color: white;
-      font-family: 'Press Start 2P', cursive;
+      text-align: center;
       overflow: hidden;
     }
 
-    .stars {
+    canvas {
       position: fixed;
-      bottom: 0;
+      top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
       z-index: -1;
-      overflow: visible;
-    }
-
-    .star {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background-color: #00ffff;
-      opacity: 0.7;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
-    }
-
-    @keyframes floatStar {
-      0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0.2;
-      }
-      25% {
-        transform: translateY(-30vh) translateX(5vw);
-        opacity: 0.5;
-      }
-      50% {
-        transform: translateY(-60vh) translateX(-3vw);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-100vh) translateX(0vw);
-        opacity: 0;
-      }
     }
 
     header {
-      text-align: center;
-      padding: 50px 20px 20px 20px;
-      font-size: 18px;
+      padding: 20px;
     }
 
-    .subtitle {
-      font-size: 10px;
-      margin-top: 10px;
-      color: #ccc;
-    }
-
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      background-color: #ccc;
-      color: black;
-      padding: 10px 20px;
-      border: none;
-      font-family: inherit;
-      font-size: 10px;
-      cursor: pointer;
-      border-radius: 12px;
-      transition: 0.2s;
-    }
-
-    .btn:hover {
-      background-color: #00ffff;
-      color: #000;
-    }
-
-    .game-hub {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px 0;
-      flex-wrap: wrap;
-    }
-
-    .game-slot {
-      background-color: #1f1f1f;
-      border: 2px solid #333;
-      width: 200px;
-      height: 220px;
-      padding: 10px;
-      box-sizing: border-box;
-      text-align: center;
+    h1 {
+      font-size: 3em;
+      margin: 0;
       color: white;
-      cursor: pointer;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      transition: 0.3s ease;
-      overflow: hidden;
     }
 
-    .game-slot:hover {
-      border-color: #00ffff;
-      transform: scale(1.05);
+    nav {
+      margin: 20px 0;
     }
 
-    .game-img {
-      width: 160px;
-      height: 160px;
+    nav a {
+      text-decoration: none;
+      color: white;
+      background: #111;
+      border: 2px solid #fff;
+      padding: 10px 20px;
+      margin: 0 10px;
       border-radius: 8px;
-      object-fit: cover;
-      margin-bottom: 8px;
+      transition: 0.3s;
+      font-size: 1.1em;
     }
 
-    .game-slot > span {
-      font-size: 10px;
-      line-height: 1.2;
-      text-align: center;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    nav a:hover {
+      background: #444;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .game-card {
+      background: rgba(20, 20, 20, 0.8);
+      border: 2px solid white;
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .game-card img {
       max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .game-card h3 {
+      margin: 10px 0;
+      font-size: 1.3em;
+    }
+
+    footer {
+      margin: 30px 0;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="stars" id="stars-container"></div>
-
+  <canvas id="stars"></canvas>
   <header>
-    <h1>The UGH</h1>
-    <div class="subtitle">its just so peak😭</div>
-
-    <div class="btn-container">
-      <button class="btn" onclick="location.href='update-log.html'">Update Log</button>
-    </div>
+    <h1>Welcome to The UGH</h1>
+    <nav>
+      <a href="update-log.html">Update Log</a>
+      <a href="credits.html">Credits</a>
+    </nav>
   </header>
 
-  <section class="game-hub">
-    <div class="game-slot" onclick="window.location.href='stickman-parkour.html'">
-      <img class="game-img" src="/images/stickman.png" alt="Stickman Parkour" />
-      <span>Stickman Parkour</span>
+  <section class="game-grid">
+    <div class="game-card">
+      <a href="stickman.html">
+        <img src="stickman-thumb.jpg" alt="Stickman Parkour">
+        <h3>Stickman Parkour</h3>
+      </a>
     </div>
-    <div class="game-slot" onclick="window.location.href='tunnelrush.html'">
-      <img class="game-img" src="/images/tunnelrush.png" alt="Tunnel Rush" />
-      <span>Tunnel Rush</span>
+    <div class="game-card">
+      <a href="tunnelrush.html">
+        <img src="tunnelrush-thumb.jpg" alt="Tunnel Rush">
+        <h3>Tunnel Rush</h3>
+      </a>
     </div>
-    <div class="game-slot" onclick="window.location.href='monkeymart.html'">
-      <img class="game-img" src="/images/monkeymart-thumb.jpg" alt="Monkey Mart" />
-      <span>Monkey Mart</span>
+    <div class="game-card">
+      <a href="monkeymart.html">
+        <img src="monkeymart-thumb.jpg" alt="Monkey Mart">
+        <h3>Monkey Mart</h3>
+      </a>
     </div>
-    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 4</span></div>
-    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 5</span></div>
-    <div class="game-slot"><img class="game-img" src="/images/placeholder.png"><span>Game 6</span></div>
   </section>
 
+  <footer>
+    <p>&copy; 2025 The UGH</p>
+  </footer>
+
   <script>
-    const container = document.getElementById('stars-container');
-    const starColors = ['#00ffff', '#6666ff', '#99ccff', '#cceeff'];
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    function createStar() {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.bottom = `-10px`;
-      star.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)];
-
-      const duration = 15 + Math.random() * 10;
-      star.style.animation = `floatStar ${duration}s linear forwards`;
-
-      container.appendChild(star);
-
-      star.addEventListener('animationend', () => {
-        container.removeChild(star);
-        createStar();
+    let stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        speed: Math.random() * 0.5 + 0.2
       });
     }
 
-    for(let i = 0; i < 100; i++) {
-      setTimeout(createStar, i * 200);
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "white";
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
     }
+
+    function updateStars() {
+      stars.forEach(star => {
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      });
+    }
+
+    function animate() {
+      drawStars();
+      updateStars();
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   </script>
 </body>
 </html>
