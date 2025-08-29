@@ -8,160 +8,87 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      overflow: hidden;
       background: black;
+      font-family: Arial, sans-serif;
       color: white;
       text-align: center;
-      overflow: hidden;
     }
-
     canvas {
       position: fixed;
       top: 0;
       left: 0;
       z-index: -1;
     }
-
-    header {
-      padding: 20px;
-    }
-
     h1 {
+      margin-top: 50px;
       font-size: 3em;
-      margin: 0;
+    }
+    .button-container {
+      margin-top: 30px;
+    }
+    .button-container a {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 1.2em;
       color: white;
-    }
-
-    nav {
-      margin: 20px 0;
-    }
-
-    nav a {
       text-decoration: none;
-      color: white;
-      background: #111;
-      border: 2px solid #fff;
-      padding: 10px 20px;
-      margin: 0 10px;
+      background-color: #222;
+      border: 2px solid white;
       border-radius: 8px;
       transition: 0.3s;
-      font-size: 1.1em;
     }
-
-    nav a:hover {
-      background: #444;
-    }
-
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .game-card {
-      background: rgba(20, 20, 20, 0.8);
-      border: 2px solid white;
-      border-radius: 12px;
-      padding: 15px;
-    }
-
-    .game-card img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-
-    .game-card h3 {
-      margin: 10px 0;
-      font-size: 1.3em;
-    }
-
-    footer {
-      margin: 30px 0;
-      font-size: 0.9em;
-      color: #aaa;
+    .button-container a:hover {
+      background-color: white;
+      color: black;
     }
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
-  <header>
-    <h1>Welcome to The UGH</h1>
-    <nav>
-      <a href="update-log.html">Update Log</a>
-      <a href="credits.html">Credits</a>
-    </nav>
-  </header>
-
-  <section class="game-grid">
-    <div class="game-card">
-      <a href="stickman.html">
-        <img src="stickman-thumb.jpg" alt="Stickman Parkour">
-        <h3>Stickman Parkour</h3>
-      </a>
-    </div>
-    <div class="game-card">
-      <a href="tunnelrush.html">
-        <img src="tunnelrush-thumb.jpg" alt="Tunnel Rush">
-        <h3>Tunnel Rush</h3>
-      </a>
-    </div>
-    <div class="game-card">
-      <a href="monkeymart.html">
-        <img src="monkeymart-thumb.jpg" alt="Monkey Mart">
-        <h3>Monkey Mart</h3>
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 The UGH</p>
-  </footer>
+  <canvas id="starfield"></canvas>
+  <h1>Welcome to The UGH</h1>
+  <div class="button-container">
+    <a href="stickman.html">Stickman Parkour</a>
+    <a href="tunnelrush.html">Tunnel Rush</a>
+    <a href="monkeymart.html">Monkey Mart</a>
+    <a href="update-log.html">Update Log</a>
+    <a href="credits.html">Credits</a>
+  </div>
 
   <script>
-    const canvas = document.getElementById("stars");
+    const canvas = document.getElementById("starfield");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    let stars = [];
+    const stars = [];
     for (let i = 0; i < 200; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 2,
-        speed: Math.random() * 0.5 + 0.2
+        size: Math.random() * 2,
+        speed: Math.random() * 0.5 + 0.2,
       });
     }
 
-    function drawStars() {
+    function animateStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "white";
-      stars.forEach(star => {
+      stars.forEach((star) => {
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
-      });
-    }
-
-    function updateStars() {
-      stars.forEach(star => {
         star.y += star.speed;
         if (star.y > canvas.height) {
           star.y = 0;
           star.x = Math.random() * canvas.width;
         }
       });
+      requestAnimationFrame(animateStars);
     }
 
-    function animate() {
-      drawStars();
-      updateStars();
-      requestAnimationFrame(animate);
-    }
-    animate();
+    animateStars();
 
     window.addEventListener("resize", () => {
       canvas.width = window.innerWidth;
